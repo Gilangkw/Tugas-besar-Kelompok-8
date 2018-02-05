@@ -8,7 +8,8 @@ package tugas_besar.database;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
-
+import tugas_besar.impl.IuranDaoImp;
+import tugas_besar.service.IuranDao;
 
 /**
  *
@@ -16,7 +17,7 @@ import java.sql.SQLException;
  */
 public class IuranDatabase {
     private static Connection connection;
-    
+    private static IuranDao iuranDao;
     
     public static Connection getConnection()throws SQLException{
         
@@ -32,6 +33,13 @@ public class IuranDatabase {
         
       return connection;
     } 
-   
+    public static IuranDao getIuranDao()throws SQLException{
+        if (iuranDao == null) {
+            iuranDao =  new IuranDaoImp(getConnection());
+            
+        }
+    
+        return iuranDao;
+    }
     
 }
